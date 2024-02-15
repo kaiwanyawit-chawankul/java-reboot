@@ -14,15 +14,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.junit.jupiter.MockitoSettings;
-
 import com.example.demo.infra.ApplicationDao;
 import com.example.demo.service.Mocking;
 
 @ExtendWith(MockitoExtension.class)
-// @MockitoSettings(strictness = Strictness.LENIENT)
 public class MockingTests {
 
     Mocking mocking;
