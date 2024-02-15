@@ -1,11 +1,13 @@
 package com.example.demo.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
     private String username;
     private String password;
     private String role;
+    private List<String> posts;
 
     public String getUsername() {
         return username;
@@ -27,5 +29,13 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
-    private List<String> posts;
+
+    public List<String> getAllPostsContainingWord(String word) {
+        List<String> filteredPosts = new ArrayList<>();
+        for(String post: posts) {
+            if(post.contains(word))
+                filteredPosts.add(post);
+        }
+        return filteredPosts;
+    }
 }
