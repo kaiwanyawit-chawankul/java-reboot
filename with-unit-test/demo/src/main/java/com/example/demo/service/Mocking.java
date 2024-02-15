@@ -1,4 +1,7 @@
-package com.example.demo.domain;
+package com.example.demo.service;
+
+import com.example.demo.domain.User;
+import com.example.demo.infra.ApplicationDao;
 
 public class Mocking {
     User user;
@@ -16,5 +19,14 @@ public class Mocking {
             System.out.println("Cannot assign permission");
             return -1;
         }
+    }
+
+    public int updateUsername(String id, String username) throws Exception{
+            ApplicationDao applicationDao = new ApplicationDao();
+            User user = applicationDao.getUserById(id);
+            if(user!=null)
+                user.setUsername(username);
+            applicationDao.save(user);
+            return 1;
     }
 }
