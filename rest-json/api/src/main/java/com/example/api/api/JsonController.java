@@ -4,11 +4,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,12 +22,20 @@ public class JsonController {
         ObjectMapper mapper = new ObjectMapper();
         Student found = null;
         try {
-            Student[] student = mapper.readValue(new File("src/main/data/users.json"), Student[].class);
-            found=student[0];
+            Student[] students = mapper.readValue(new File("src/main/data/users.json"), Student[].class);
+
+            found = findFirstByName(students, name);
         } catch (Exception e) {
             System.out.println(e);
         }
 
 		return found.College;
 	}
+
+    public static Student findFirstByName(Student[] students, String name) {
+        return Arrays.stream(students)
+                .filter(student -> student.Name.equalsIgnoreCase(name))
+                .findFirst()
+                .orElse(null);
+    }
 }
